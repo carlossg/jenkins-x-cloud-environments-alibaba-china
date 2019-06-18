@@ -5,14 +5,66 @@ chartmuseum:
 jenkins:
   Persistence:
     Size: 20Gi
+  Agent:
+    PodTemplates:
+      # TODO add the rest
+      JX-base:
+        Containers:
+          JX-base:
+            Image: docker.io/csanchez/builder-jx:0.1.523
+      Promote:
+        Containers:
+          Promote:
+            Image: docker.io/csanchez/builder-jx:0.1.523
+      Maven:
+        Containers:
+          Maven:
+            Image: docker.io/csanchez/builder-maven:0.1.523
+      Go:
+        Containers:
+          Go:
+            Image: docker.io/csanchez/builder-go:0.1.523
 monocular:
   mongodb:
     persistence:
       size: 20Gi
 nexus:
+  image:
+    repository: docker.io/csanchez/nexus
   persistence:
     size: 20Gi
+expose:
+  Image: docker.io/csanchez/exposecontroller
+cleanup:
+  Image: docker.io/csanchez/exposecontroller
+heapster:
+  image:
+    repository: docker.io/csanchez/heapster
+  resizer:
+    image:
+      repository: docker.io/csanchez/addon-resizer
+gcpreviews:
+  image:
+    repository: docker.io/csanchez/builder-go
+controllerbuild:
+  image:
+    repository: docker.io/csanchez/builder-go
+controllerteam:
+  image:
+    repository: docker.io/csanchez/builder-go
+
+# Because tekton and prow are installed individually and not part of the platform its config needs to be in the top level
 # Tekton config
-# Because tekton is installed individually and not part of the platform its config needs to be in the top level
 pvc:
   size: 20Gi
+# Prow config
+pipelinerunner:
+  image:
+    repository: docker.io/csanchez/builder-maven
+# Tekton and Prow config
+image:
+  # prow config, pull images from docker.io/csanchez
+  repository: csanchez
+  # tekton config, pull images from docker.io/csanchez
+  controller: csanchez/controller
+  webhook: csanchez/webhook

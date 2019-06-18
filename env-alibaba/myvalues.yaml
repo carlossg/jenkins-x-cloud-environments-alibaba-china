@@ -20,6 +20,10 @@ jenkins:
         Containers:
           Maven:
             Image: docker.io/csanchez/builder-maven:0.1.523
+      Maven-Java11:
+        Containers:
+          Maven:
+            Image: docker.io/csanchez/builder-maven-java11:0.1.523
       Go:
         Containers:
           Go:

@@ -11,51 +11,51 @@ jenkins:
       JX-base:
         Containers:
           JX-base:
-            Image: docker.io/csanchez/builder-jx:0.1.523
+            Image: gcr.azk8s.cn/jenkinsxio/builder-jx:0.1.523
       Promote:
         Containers:
           Promote:
-            Image: docker.io/csanchez/builder-jx:0.1.523
+            Image: gcr.azk8s.cn/jenkinsxio/builder-jx:0.1.523
       Maven:
         Containers:
           Maven:
-            Image: docker.io/csanchez/builder-maven:0.1.523
+            Image: gcr.azk8s.cn/jenkinsxio/builder-maven:0.1.523
       Maven-Java11:
         Containers:
           Maven:
-            Image: docker.io/csanchez/builder-maven-java11:0.1.523
+            Image: gcr.azk8s.cn/jenkinsxio/builder-maven-java11:0.1.523
       Go:
         Containers:
           Go:
-            Image: docker.io/csanchez/builder-go:0.1.523
+            Image: gcr.azk8s.cn/jenkinsxio/builder-go:0.1.523
 monocular:
   mongodb:
     persistence:
       size: 20Gi
 nexus:
   image:
-    repository: docker.io/csanchez/nexus
+    repository: gcr.azk8s.cn/jenkinsxio/nexus
   persistence:
     size: 20Gi
 expose:
-  Image: docker.io/csanchez/exposecontroller
+  Image: gcr.azk8s.cn/google_containers/exposecontroller
 cleanup:
-  Image: docker.io/csanchez/exposecontroller
+  Image: gcr.azk8s.cn/google_containers/exposecontroller
 heapster:
   image:
-    repository: docker.io/csanchez/heapster
+    repository: gcr.azk8s.cn/google_containers/heapster
   resizer:
     image:
-      repository: docker.io/csanchez/addon-resizer
+      repository: gcr.azk8s.cn/google_containers/addon-resizer
 gcpreviews:
   image:
-    repository: docker.io/csanchez/builder-go
+    repository: gcr.azk8s.cn/jenkinsxio/builder-go
 controllerbuild:
   image:
-    repository: docker.io/csanchez/builder-go
+    repository: gcr.azk8s.cn/jenkinsxio/builder-go
 controllerteam:
   image:
-    repository: docker.io/csanchez/builder-go
+    repository: gcr.azk8s.cn/jenkinsxio/builder-go
 
 # Because tekton and prow are installed individually and not part of the platform its config needs to be in the top level
 # Tekton config
@@ -64,11 +64,11 @@ pvc:
 # Prow config
 pipelinerunner:
   image:
-    repository: docker.io/csanchez/builder-maven
+    repository: gcr.azk8s.cn/jenkinsxio/builder-maven
 # Tekton and Prow config
 image:
-  # prow config, pull images from docker.io/csanchez
-  repository: csanchez
-  # tekton config, pull images from docker.io/csanchez
-  controller: csanchez/controller
-  webhook: csanchez/webhook
+  # prow config, pull images from gcr.azk8s.cn/jenkinsxio/prow
+  repository: gcr.azk8s.cn/jenkinsxio/prow
+  # tekton config, pull images from gcr.azk8s.cn/tekton-releases/github.com/tektoncd/pipeline/cmd
+  controller: gcr.azk8s.cn/tekton-releases/github.com/tektoncd/pipeline/cmd/controller
+  webhook: gcr.azk8s.cn/tekton-releases/github.com/tektoncd/pipeline/cmd/webhook
